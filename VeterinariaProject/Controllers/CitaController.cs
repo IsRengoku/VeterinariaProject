@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Cita")]
     [Authorize]
-    public class SedeController : ApiController
+
+    public class CitaController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsCita cita = new clsCita();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Cita newCita)
         {
-            return sede.Insertar(newSede);
+            return cita.Insertar(newCita);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Cita ConsultarXId(int idCita)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return cita.Consultar(idCita);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Cita> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return cita.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idCita, [FromBody] Cita _cita)
         {
-            return sede.Actualizar(idSede, _sede);
+            return cita.Actualizar(idCita, _cita);
         }
-
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idCita)
         {
-            return sede.Eliminar(idSede);
+            return cita.Eliminar(idCita);
         }
     }
 }
