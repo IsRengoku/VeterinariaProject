@@ -33,28 +33,34 @@ namespace VeterinariaProject.Clases
             Herramienta her = vet.Herramientas.FirstOrDefault(p => p.id == idHerramienta);
             return her;
         }
-        public List<Herramienta> ConsultarTodos()
+        public List<Herramienta> ConsultarXProveedor(string nombreProveedor)
         {
             return vet.Herramientas
-                .OrderBy(m => m.id)
+                .Where(h => h.Proveedor.nombre == nombreProveedor)
+                .ToList();
+        }
+        public List<Herramienta> ConsultarXTipo(string tipo)
+        {
+            return vet.Herramientas
+                .Where(h=> h.tipo == tipo)
                 .ToList();
         }
 
-        public string Actualizar(int idHerramienta, Herramienta herramienta)
+        public string Actualizar(Herramienta herramienta)
         {
             try
             {
-                Herramienta her = Consultar(idHerramienta);
+                Herramienta her = Consultar(herramienta.id);
+
                 if (her == null)
                 {
-                    return "No se encontró la herramienta a eliminar";
+                    return "La herramienta no existe";
                 }
-                her.nombre = herramienta.nombre;
-                her.tipo = herramienta.tipo;
-                her.proveedor_id = herramienta.proveedor_id;
-                vet.Herramientas.AddOrUpdate(her);
+
+                vet.Herramientas.AddOrUpdate(herramienta);
                 vet.SaveChanges();
-                return "Se actualizó la herramienta correctamente";
+
+                return "Se actualizó la herramienta " + herramienta.nombre + " correctamente";
             }
             catch (Exception ex)
             {
