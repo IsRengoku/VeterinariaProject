@@ -30,8 +30,8 @@ namespace VeterinariaProject.Clases
         }
         public Pago Consultar(int idPago)
         {
-            Pago pay = vet.Pagoes.FirstOrDefault(p => p.id == idPago);
-            return pay;
+            Pago pago = vet.Pagoes.FirstOrDefault(p => p.id == idPago);
+            return pago;
         }
         public List<Pago> ConsultarTodos()
         {
@@ -67,12 +67,12 @@ namespace VeterinariaProject.Clases
         {
             try
             {
-                Pago pay = Consultar(idPago);
-                if (pay == null)
+                Pago pago = Consultar(idPago);
+                if (pago == null)
                 {
                     return "El pago no existe";
                 }
-                vet.Pagoes.Remove(pay);
+                vet.Pagoes.Remove(pago);
                 vet.SaveChanges();
                 return "Se eliminó el pago correctamente";
             }

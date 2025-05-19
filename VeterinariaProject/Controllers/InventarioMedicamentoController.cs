@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/InventarioMedicamento")]
     [Authorize]
-    public class SedeController : ApiController
+    public class InventarioMedicamentoController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsInventarioMedicamento _inventarioMedicamento = new clsInventarioMedicamento();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] InventarioMedicamento newInventarioMedicamento)
         {
-            return sede.Insertar(newSede);
+            return _inventarioMedicamento.Insertar(newInventarioMedicamento);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public InventarioMedicamento ConsultarXId(int idInventarioMedicamento)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return _inventarioMedicamento.Consultar(idInventarioMedicamento);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<InventarioMedicamento> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return _inventarioMedicamento.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idInventarioMedicamento, [FromBody] InventarioMedicamento inventarioMedicamento)
         {
-            return sede.Actualizar(idSede, _sede);
+            return _inventarioMedicamento.Actualizar(idInventarioMedicamento, inventarioMedicamento);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idInventarioMedicamento)
         {
-            return sede.Eliminar(idSede);
+            return _inventarioMedicamento.Eliminar(idInventarioMedicamento);
         }
     }
 }
