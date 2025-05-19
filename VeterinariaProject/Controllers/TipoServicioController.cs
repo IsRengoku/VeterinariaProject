@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/TipoServicio")]
     [Authorize]
-    public class SedeController : ApiController
+
+    public class TipoServicioController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsTipoServicio tipoServicio = new clsTipoServicio();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] TipoServicio newTipoServicio)
         {
-            return sede.Insertar(newSede);
+            return tipoServicio.Insertar(newTipoServicio);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public TipoServicio ConsultarXId(int idTipoServicio)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return tipoServicio.Consultar(idTipoServicio);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<TipoServicio> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return tipoServicio.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idTipoServicio, [FromBody] TipoServicio _tipoServicio)
         {
-            return sede.Actualizar(idSede, _sede);
+            return tipoServicio.Actualizar(idTipoServicio, _tipoServicio);
         }
-
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idTipoServicio)
         {
-            return sede.Eliminar(idSede);
+            return tipoServicio.Eliminar(idTipoServicio);
         }
     }
 }
