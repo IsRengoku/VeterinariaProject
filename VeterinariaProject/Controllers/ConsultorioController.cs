@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Consultorio")]
     [Authorize]
-    public class SedeController : ApiController
+
+    public class ConsultorioController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsConsultorio consultorio = new clsConsultorio();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Consultorio newConsultorio)
         {
-            return sede.Insertar(newSede);
+            return consultorio.Insertar(newConsultorio);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Consultorio ConsultarXId(int idConsultorio)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return consultorio.Consultar(idConsultorio);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Consultorio> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return consultorio.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idConsultorio, [FromBody] Consultorio _consultorio)
         {
-            return sede.Actualizar(idSede, _sede);
+            return consultorio.Actualizar(idConsultorio, _consultorio);
         }
-
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idConsultorio)
         {
-            return sede.Eliminar(idSede);
+            return consultorio.Eliminar(idConsultorio);
         }
     }
 }

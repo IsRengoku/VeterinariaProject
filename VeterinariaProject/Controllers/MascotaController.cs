@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Mascota")]
     [Authorize]
-    public class SedeController : ApiController
+
+    public class MascotaController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsMascota mascota = new clsMascota();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Mascota newMascota)
         {
-            return sede.Insertar(newSede);
+            return mascota.Insertar(newMascota);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Mascota ConsultarXId(int idMascota)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return mascota.Consultar(idMascota);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Mascota> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return mascota.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idMascota, [FromBody] Mascota _mascota)
         {
-            return sede.Actualizar(idSede, _sede);
+            return mascota.Actualizar(idMascota, _mascota);
         }
-
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idMascota)
         {
-            return sede.Eliminar(idSede);
+            return mascota.Eliminar(idMascota);
         }
     }
 }
