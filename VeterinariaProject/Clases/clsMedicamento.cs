@@ -39,6 +39,18 @@ namespace VeterinariaProject.Clases
                 .OrderBy(m => m.id)
                 .ToList();
         }
+        public List<Medicamento> ConsultarXProveedor(string nombreProveedor)
+        {
+            return vet.Medicamentoes
+                .Where(m => m.Proveedor.nombre == nombreProveedor)
+                .ToList();
+        }
+        public List<Medicamento> ConsultarXTipo(string tipo)
+        {
+            return vet.Medicamentoes
+                .Where(m => m.tipo == tipo)
+                .ToList();
+        }
 
         public string Actualizar(int idMedicamento, Medicamento medicamento)
         {

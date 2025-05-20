@@ -9,52 +9,53 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Herramienta")]
     [Authorize]
-    public class SedeController : ApiController
+    public class HerramientaController : ApiController
     {
-        private clsSede sede = new clsSede();
+       private clsHerramienta Herramienta = new clsHerramienta();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Herramienta newHerramienta)
         {
-            return sede.Insertar(newSede);
+            return Herramienta.Insertar(newHerramienta);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Herramienta ConsultarXId(int idHerramienta)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return Herramienta.Consultar(idHerramienta);
         }
 
         [HttpGet]
-        [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        [Route("ConsultarXTipo")]
+        public List<Herramienta> ConsultarXTipo(string tipo)
         {
-            return sede.ConsultarTodos();
+            return Herramienta.ConsultarXTipo(tipo);
+        }
+
+        [HttpGet]
+        [Route("ConsultarXProveedor")]
+        public List<Herramienta> ConsultarXProveedor(string nombreProveedor)
+        {
+            return Herramienta.ConsultarXProveedor(nombreProveedor);
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar([FromBody] Herramienta _Herramienta)
         {
-            return sede.Actualizar(idSede, _sede);
+            return Herramienta.Actualizar(_Herramienta);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idHerramienta)
         {
-            return sede.Eliminar(idSede);
+            return Herramienta.Eliminar(idHerramienta);
         }
     }
 }
