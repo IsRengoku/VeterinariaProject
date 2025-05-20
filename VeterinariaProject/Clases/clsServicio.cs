@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Clases
 {
-        public class clsServicio
+    public class clsServicio
     {
         private VeterinariaEntities vet = new VeterinariaEntities();
 
@@ -82,6 +83,31 @@ namespace VeterinariaProject.Clases
             {
                 return ex.Message;
             }
+        }
+
+        public List<Servicio> Filtrar(string fecha_ingreso, string fecha_salida, int mascota_id, int empleado_id, int consultorio_id, int tipoServicio_id)
+        {
+            var query = vet.Servicios.AsQueryable();
+
+            if (DateTime.TryParseExact(fecha_ingreso, "yyyy-mm-dd", null, DateTimeStyles.None, out DateTime fecha_ingresoT))
+                query = query.Where(s => s.fecha_ingreso >= fecha_ingresoT);
+
+            if (DateTime.TryParseExact(fecha_salida, "yyyy-mm-dd", null, DateTimeStyles.None, out DateTime fecha_salidaT))
+                query = query.Where(s => s.fecha_salida <= fecha_salidaT);
+
+            if (mascota_id > 0)
+                query = query.Where(s => s.mascota_id == mascota_id);
+
+            if (empleado_id > 0)
+                query = query.Where(s => s.empleado_id == empleado_id);
+
+            if (consultorio_id > 0)
+                query = query.Where(s => s.consultorio_id == consultorio_id);
+
+            if (tipoServicio_id > 0)
+                query = query.Where(s => s.tipoServicio_id == tipoServicio_id);
+
+            return query.ToList();
         }
     }
 
