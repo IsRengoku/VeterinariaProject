@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Farmacia")]
     [Authorize]
-    public class SedeController : ApiController
+    public class FarmaciaController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsFarmacia farm = new clsFarmacia();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Farmacia newFarmacia)
         {
-            return sede.Insertar(newSede);
+            return farm.Insertar(newFarmacia);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Farmacia ConsultarXId(int idFarmacia)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return farm.Consultar(idFarmacia);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Farmacia> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return farm.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idFarmacia, [FromBody] Farmacia _Farmacia)
         {
-            return sede.Actualizar(idSede, _sede);
+            return farm.Actualizar(idFarmacia, _Farmacia);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idFarmacia)
         {
-            return sede.Eliminar(idSede);
+            return farm.Eliminar(idFarmacia);
         }
     }
 }

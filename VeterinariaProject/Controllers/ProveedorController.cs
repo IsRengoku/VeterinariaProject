@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Proveedor")]
     [Authorize]
-    public class SedeController : ApiController
+    public class ProveedorController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsProveedor prov = new clsProveedor();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Proveedor newProveedor)
         {
-            return sede.Insertar(newSede);
+            return prov.Insertar(newProveedor);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Proveedor ConsultarXId(int idProveedor)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return prov.Consultar(idProveedor);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Proveedor> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return prov.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idProveedor, [FromBody] Proveedor _prov)
         {
-            return sede.Actualizar(idSede, _sede);
+            return prov.Actualizar(idProveedor, _prov);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idProveedor)
         {
-            return sede.Eliminar(idSede);
+            return prov.Eliminar(idProveedor);
         }
     }
 }

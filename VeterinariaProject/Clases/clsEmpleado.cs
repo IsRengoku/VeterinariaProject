@@ -12,49 +12,51 @@ namespace VeterinariaProject.Clases
     {
         private VeterinariaEntities vet = new VeterinariaEntities();
 
-        private Sede sede { get; set; }
+        private Empleado emp { get; set; }
 
 
-        public string Insertar(Sede nuevaSede)
+        public string Insertar(Empleado nuevaEmpleado)
         {
             try
             {
-                vet.Sedes.Add(nuevaSede);
+                vet.Empleadoes.Add(nuevaEmpleado);
                 vet.SaveChanges();
-                return "Se ingresó la Sede la base de datos";
+                return "Se ingresó el empleado la base de datos";
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
         }
-        public Sede Consultar(int idSede)
+        public Empleado Consultar(int idEmpleado)
         {
-            Sede mat = vet.Sedes.FirstOrDefault(p => p.id == idSede);
+            Empleado mat = vet.Empleadoes.FirstOrDefault(p => p.id == idEmpleado);
             return mat;
         }
-        public List<Sede> ConsultarTodos()
+        public List<Empleado> ConsultarTodos()
         {
-            return vet.Sedes
+            return vet.Empleadoes
                 .OrderBy(m => m.id)
                 .ToList();
         }
 
-        public string Actualizar(int idSede, Sede sede)
+        public string Actualizar(int idEmpleado, Empleado emp)
         {
             try
             {
-                Sede sed = Consultar(idSede);
+                Empleado sed = Consultar(idEmpleado);
                 if (sed == null)
                 {
-                    return "No se encontró la Sede a eliminar";
+                    return "No se encontró el empleado a eliminar";
                 }
-                sed.nombre = sede.nombre;
-                sed.ciudad = sede.ciudad;
-                sed.direccion = sede.direccion;
-                vet.Sedes.AddOrUpdate(sede);
+                sed.nombre = emp.nombre;
+                sed.correo = emp.correo;
+                sed.contrasena = emp.contrasena;
+                sed.rol = emp.rol;
+                sed.sede_id = emp.sede_id;
+                vet.Empleadoes.AddOrUpdate(emp);
                 vet.SaveChanges();
-                return "Se actualizó la Sede correctamente";
+                return "Se actualizó el empleado correctamente";
             }
             catch (Exception ex)
             {
@@ -62,18 +64,18 @@ namespace VeterinariaProject.Clases
             }
         }
 
-        public string Eliminar(int idSede)
+        public string Eliminar(int idEmpleado)
         {
             try
             {
-                Sede prod = Consultar(idSede);
+                Empleado prod = Consultar(idEmpleado);
                 if (prod == null)
                 {
-                    return "El producto no existe";
+                    return "El empleado no existe";
                 }
-                vet.Sedes.Remove(prod);
+                vet.Empleadoes.Remove(prod);
                 vet.SaveChanges();
-                return "Se eliminó la Sede correctamente";
+                return "Se eliminó el empleado correctamente";
             }
             catch (Exception ex)
             {

@@ -9,52 +9,46 @@ using VeterinariaProject.Models;
 
 namespace VeterinariaProject.Controllers
 {
-    [RoutePrefix("api/Matricula")]
+    [RoutePrefix("api/Empleado")]
     [Authorize]
-    public class SedeController : ApiController
+    public class EmpleadoController : ApiController
     {
-        private clsSede sede = new clsSede();
+        private clsEmpleado emp = new clsEmpleado();
 
         [HttpPost]
         [Route("Insertar")]
-        public string Insertar([FromBody] Sede newSede)
+        public string Insertar([FromBody] Empleado newEmpleado)
         {
-            return sede.Insertar(newSede);
+            return emp.Insertar(newEmpleado);
         }
 
         [HttpGet]
         [Route("ConsultarXId")]
-        public Sede ConsultarXId(int idSede)
+        public Empleado ConsultarXId(int idEmpleado)
         {
-            return sede.Consultar(idSede);
-        }
-        [HttpGet]
-        [Route("ConsultarXCidudad")]
-        public List<Sede> ConsultarXCiudad(string ciudad)
-        {
-            return sede.ConsultarXCiudad(ciudad);
+            return emp.Consultar(idEmpleado);
         }
 
         [HttpGet]
         [Route("ConsultarTodos")]
-        public List<Sede> ConsultarTodos()
+        public List<Empleado> ConsultarTodos()
         {
-            return sede.ConsultarTodos();
+            return emp.ConsultarTodos();
         }
 
         [HttpPut]
         [Route("Actualizar")]
-        public string Actualizar(int idSede, [FromBody] Sede _sede)
+        public string Actualizar(int idEmpleado, [FromBody] Empleado _emp)
         {
-            return sede.Actualizar(idSede, _sede);
+            return emp.Actualizar(idEmpleado, _emp);
         }
 
 
         [HttpDelete]
         [Route("Eliminar")]
-        public string Eliminar(int idSede)
+        public string Eliminar(int idEmpleado)
         {
-            return sede.Eliminar(idSede);
+            return emp.Eliminar(idEmpleado);
         }
     }
 }
