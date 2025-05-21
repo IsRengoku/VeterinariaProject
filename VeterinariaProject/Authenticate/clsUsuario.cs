@@ -7,7 +7,7 @@ namespace VeterinariaProject.Authenticate
 {
     public class clsUsuario
     {
-        private VeterinariaEntities vet = new VeterinariaEntities();
+        private Veterinaria1Entities vet = new Veterinaria1Entities();
         public Usuario usuario { get; set; }
 
         public string CrearUsuario(int idPerfil)
@@ -24,15 +24,8 @@ namespace VeterinariaProject.Authenticate
                 if (string.IsNullOrWhiteSpace(usuario.contraseña))
                     return "La contraseña es requerida";
 
-                if (usuario.empleado_id <= 0)
-                    return "ID de empleado inválido";
-
                 // 2. Validar existencia de relaciones
-                var estudianteExistente = vet.Empleadoes.Find(usuario.empleado_id);
-                if (estudianteExistente == null)
-                    return "No existe un empleado con el ID proporcionado";
-
-                var perfilExistente = vet.Perfils.Find(idPerfil);
+                var perfilExistente = vet.Perfils.Find(usuario.perfil_id);
                 if (perfilExistente == null)
                     return "No existe un perfil con el ID proporcionado";
 
@@ -50,18 +43,6 @@ namespace VeterinariaProject.Authenticate
                 // 6. Guardar en base de datos
                 vet.Usuarios.Add(usuario);
                 vet.SaveChanges();
-
-                // 7. Crear relación Usuario_Perfil
-                var usuarioPerfil = new Usuario_Perfil
-                {
-                    idUsuario = usuario.id,
-                    idPerfil = idPerfil,
-                    Activo = true
-                };
-
-                vet.Usuario_Perfil.Add(usuarioPerfil);
-                vet.SaveChanges();
-
                 return "Usuario creado exitosamente";
             }
             catch (DbEntityValidationException ex)

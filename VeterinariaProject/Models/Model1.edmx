@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="VeterinariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Veterinaria1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cita">
           <Key>
             <PropertyRef Name="id" />
@@ -42,8 +42,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="correo" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="contrasena" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="usuario_id" Type="int" />
           <Property Name="sede_id" Type="int" />
         </EntityType>
         <EntityType Name="Farmacia">
@@ -116,6 +116,14 @@
           <Property Name="servicio_id" Type="int" />
           <Property Name="medicamento_id" Type="int" />
         </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="PaginaNavegar" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="id" />
@@ -164,9 +172,9 @@
           <Property Name="userName" Type="nvarchar" MaxLength="100" />
           <Property Name="contraseña" Type="nvarchar(max)" />
           <Property Name="salt" Type="nvarchar(max)" />
-          <Property Name="empleado_id" Type="int" />
+          <Property Name="perfil_id" Type="int" />
         </EntityType>
-        <Association Name="FK__Cita__empleado_i__5535A963">
+        <Association Name="FK__Cita__empleado_i__5629CD9C">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +186,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cita__mascota_id__5441852A">
+        <Association Name="FK__Cita__mascota_id__5535A963">
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +198,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cita__sede_id__5629CD9C">
+        <Association Name="FK__Cita__sede_id__571DF1D5">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +210,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Consultor__sede___5165187F">
+        <Association Name="FK__Consultor__sede___52593CB8">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Consultorio" Type="Self.Consultorio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Empleado__sede_i__398D8EEE">
+        <Association Name="FK__Empleado__sede_i__3F466844">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -226,7 +234,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Farmacia__sede_i__3C69FB99">
+        <Association Name="FK__Empleado__usuari__3E52440B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Farmacia__sede_i__4222D4EF">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -238,7 +258,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Herramien__prove__412EB0B6">
+        <Association Name="FK__Herramien__prove__46E78A0C">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
           <End Role="Herramienta" Type="Self.Herramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -250,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__farma__656C112C">
+        <Association Name="FK__Inventari__farma__66603565">
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="0..1" />
           <End Role="InventarioMedicamento" Type="Self.InventarioMedicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,7 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__farma__693CA210">
+        <Association Name="FK__Inventari__farma__6A30C649">
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="0..1" />
           <End Role="InventarioHerramienta" Type="Self.InventarioHerramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -274,7 +294,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__herra__68487DD7">
+        <Association Name="FK__Inventari__herra__693CA210">
           <End Role="Herramienta" Type="Self.Herramienta" Multiplicity="0..1" />
           <End Role="InventarioHerramienta" Type="Self.InventarioHerramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,7 +306,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__medic__6477ECF3">
+        <Association Name="FK__Inventari__medic__656C112C">
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="0..1" />
           <End Role="InventarioMedicamento" Type="Self.InventarioMedicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -298,7 +318,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Mascota__cliente__4D94879B">
+        <Association Name="FK__Mascota__cliente__4E88ABD4">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
           <ReferentialConstraint>
@@ -310,7 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Mascota__sede_id__4E88ABD4">
+        <Association Name="FK__Mascota__sede_id__4F7CD00D">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,7 +342,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Medicamen__prove__440B1D61">
+        <Association Name="FK__Medicamen__prove__49C3F6B7">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -334,7 +354,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__medicament__619B8048">
+        <Association Name="FK__Pago__medicament__628FA481">
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -346,7 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__servicio_i__60A75C0F">
+        <Association Name="FK__Pago__servicio_i__619B8048">
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -358,7 +378,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__consul__5CD6CB2B">
+        <Association Name="FK__Servicio__consul__5DCAEF64">
           <End Role="Consultorio" Type="Self.Consultorio" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -370,7 +390,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__emplea__5BE2A6F2">
+        <Association Name="FK__Servicio__emplea__5CD6CB2B">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +402,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__mascot__5AEE82B9">
+        <Association Name="FK__Servicio__mascot__5BE2A6F2">
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,7 +414,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__tipoSe__5DCAEF64">
+        <Association Name="FK__Servicio__tipoSe__5EBF139D">
           <End Role="TipoServicio" Type="Self.TipoServicio" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -406,19 +426,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__emplead__6FE99F9F">
-          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+        <Association Name="FK__Usuario__perfil___3B75D760">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Empleado">
+            <Principal Role="Perfil">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="empleado_id" />
+              <PropertyRef Name="perfil_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VeterinariaModelStoreContainer">
+        <EntityContainer Name="Veterinaria1ModelStoreContainer">
           <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consultorio" EntityType="Self.Consultorio" Schema="dbo" store:Type="Tables" />
@@ -430,100 +450,106 @@
           <EntitySet Name="Mascota" EntityType="Self.Mascota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicamento" EntityType="Self.Medicamento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sede" EntityType="Self.Sede" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoServicio" EntityType="Self.TipoServicio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Cita__empleado_i__5535A963" Association="Self.FK__Cita__empleado_i__5535A963">
+          <AssociationSet Name="FK__Cita__empleado_i__5629CD9C" Association="Self.FK__Cita__empleado_i__5629CD9C">
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Cita" EntitySet="Cita" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cita__mascota_id__5441852A" Association="Self.FK__Cita__mascota_id__5441852A">
+          <AssociationSet Name="FK__Cita__mascota_id__5535A963" Association="Self.FK__Cita__mascota_id__5535A963">
             <End Role="Mascota" EntitySet="Mascota" />
             <End Role="Cita" EntitySet="Cita" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cita__sede_id__5629CD9C" Association="Self.FK__Cita__sede_id__5629CD9C">
+          <AssociationSet Name="FK__Cita__sede_id__571DF1D5" Association="Self.FK__Cita__sede_id__571DF1D5">
             <End Role="Sede" EntitySet="Sede" />
             <End Role="Cita" EntitySet="Cita" />
           </AssociationSet>
-          <AssociationSet Name="FK__Consultor__sede___5165187F" Association="Self.FK__Consultor__sede___5165187F">
+          <AssociationSet Name="FK__Consultor__sede___52593CB8" Association="Self.FK__Consultor__sede___52593CB8">
             <End Role="Sede" EntitySet="Sede" />
             <End Role="Consultorio" EntitySet="Consultorio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Empleado__sede_i__398D8EEE" Association="Self.FK__Empleado__sede_i__398D8EEE">
+          <AssociationSet Name="FK__Empleado__sede_i__3F466844" Association="Self.FK__Empleado__sede_i__3F466844">
             <End Role="Sede" EntitySet="Sede" />
             <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
-          <AssociationSet Name="FK__Farmacia__sede_i__3C69FB99" Association="Self.FK__Farmacia__sede_i__3C69FB99">
+          <AssociationSet Name="FK__Empleado__usuari__3E52440B" Association="Self.FK__Empleado__usuari__3E52440B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Farmacia__sede_i__4222D4EF" Association="Self.FK__Farmacia__sede_i__4222D4EF">
             <End Role="Sede" EntitySet="Sede" />
             <End Role="Farmacia" EntitySet="Farmacia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Herramien__prove__412EB0B6" Association="Self.FK__Herramien__prove__412EB0B6">
+          <AssociationSet Name="FK__Herramien__prove__46E78A0C" Association="Self.FK__Herramien__prove__46E78A0C">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="Herramienta" EntitySet="Herramienta" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__farma__656C112C" Association="Self.FK__Inventari__farma__656C112C">
+          <AssociationSet Name="FK__Inventari__farma__66603565" Association="Self.FK__Inventari__farma__66603565">
             <End Role="Farmacia" EntitySet="Farmacia" />
             <End Role="InventarioMedicamento" EntitySet="InventarioMedicamento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__farma__693CA210" Association="Self.FK__Inventari__farma__693CA210">
+          <AssociationSet Name="FK__Inventari__farma__6A30C649" Association="Self.FK__Inventari__farma__6A30C649">
             <End Role="Farmacia" EntitySet="Farmacia" />
             <End Role="InventarioHerramienta" EntitySet="InventarioHerramienta" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__herra__68487DD7" Association="Self.FK__Inventari__herra__68487DD7">
+          <AssociationSet Name="FK__Inventari__herra__693CA210" Association="Self.FK__Inventari__herra__693CA210">
             <End Role="Herramienta" EntitySet="Herramienta" />
             <End Role="InventarioHerramienta" EntitySet="InventarioHerramienta" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__medic__6477ECF3" Association="Self.FK__Inventari__medic__6477ECF3">
+          <AssociationSet Name="FK__Inventari__medic__656C112C" Association="Self.FK__Inventari__medic__656C112C">
             <End Role="Medicamento" EntitySet="Medicamento" />
             <End Role="InventarioMedicamento" EntitySet="InventarioMedicamento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Mascota__cliente__4D94879B" Association="Self.FK__Mascota__cliente__4D94879B">
+          <AssociationSet Name="FK__Mascota__cliente__4E88ABD4" Association="Self.FK__Mascota__cliente__4E88ABD4">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Mascota" EntitySet="Mascota" />
           </AssociationSet>
-          <AssociationSet Name="FK__Mascota__sede_id__4E88ABD4" Association="Self.FK__Mascota__sede_id__4E88ABD4">
+          <AssociationSet Name="FK__Mascota__sede_id__4F7CD00D" Association="Self.FK__Mascota__sede_id__4F7CD00D">
             <End Role="Sede" EntitySet="Sede" />
             <End Role="Mascota" EntitySet="Mascota" />
           </AssociationSet>
-          <AssociationSet Name="FK__Medicamen__prove__440B1D61" Association="Self.FK__Medicamen__prove__440B1D61">
+          <AssociationSet Name="FK__Medicamen__prove__49C3F6B7" Association="Self.FK__Medicamen__prove__49C3F6B7">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="Medicamento" EntitySet="Medicamento" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__medicament__619B8048" Association="Self.FK__Pago__medicament__619B8048">
+          <AssociationSet Name="FK__Pago__medicament__628FA481" Association="Self.FK__Pago__medicament__628FA481">
             <End Role="Medicamento" EntitySet="Medicamento" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__servicio_i__60A75C0F" Association="Self.FK__Pago__servicio_i__60A75C0F">
+          <AssociationSet Name="FK__Pago__servicio_i__619B8048" Association="Self.FK__Pago__servicio_i__619B8048">
             <End Role="Servicio" EntitySet="Servicio" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__consul__5CD6CB2B" Association="Self.FK__Servicio__consul__5CD6CB2B">
+          <AssociationSet Name="FK__Servicio__consul__5DCAEF64" Association="Self.FK__Servicio__consul__5DCAEF64">
             <End Role="Consultorio" EntitySet="Consultorio" />
             <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__emplea__5BE2A6F2" Association="Self.FK__Servicio__emplea__5BE2A6F2">
+          <AssociationSet Name="FK__Servicio__emplea__5CD6CB2B" Association="Self.FK__Servicio__emplea__5CD6CB2B">
             <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__mascot__5AEE82B9" Association="Self.FK__Servicio__mascot__5AEE82B9">
+          <AssociationSet Name="FK__Servicio__mascot__5BE2A6F2" Association="Self.FK__Servicio__mascot__5BE2A6F2">
             <End Role="Mascota" EntitySet="Mascota" />
             <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__tipoSe__5DCAEF64" Association="Self.FK__Servicio__tipoSe__5DCAEF64">
+          <AssociationSet Name="FK__Servicio__tipoSe__5EBF139D" Association="Self.FK__Servicio__tipoSe__5EBF139D">
             <End Role="TipoServicio" EntitySet="TipoServicio" />
             <End Role="Servicio" EntitySet="Servicio" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__emplead__6FE99F9F" Association="Self.FK__Usuario__emplead__6FE99F9F">
-            <End Role="Empleado" EntitySet="Empleado" />
+          <AssociationSet Name="FK__Usuario__perfil___3B75D760" Association="Self.FK__Usuario__perfil___3B75D760">
+            <End Role="Perfil" EntitySet="Perfil" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="VeterinariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Veterinaria1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cita">
           <Key>
             <PropertyRef Name="id" />
@@ -534,9 +560,9 @@
           <Property Name="mascota_id" Type="Int32" />
           <Property Name="empleado_id" Type="Int32" />
           <Property Name="sede_id" Type="Int32" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK__Cita__empleado_i__5535A963" FromRole="Cita" ToRole="Empleado" />
-          <NavigationProperty Name="Mascota" Relationship="Self.FK__Cita__mascota_id__5441852A" FromRole="Cita" ToRole="Mascota" />
-          <NavigationProperty Name="Sede" Relationship="Self.FK__Cita__sede_id__5629CD9C" FromRole="Cita" ToRole="Sede" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK__Cita__empleado_i__5629CD9C" FromRole="Cita" ToRole="Empleado" />
+          <NavigationProperty Name="Mascota" Relationship="Self.FK__Cita__mascota_id__5535A963" FromRole="Cita" ToRole="Mascota" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK__Cita__sede_id__571DF1D5" FromRole="Cita" ToRole="Sede" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -548,7 +574,7 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="documento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Mascotas" Relationship="Self.FK__Mascota__cliente__4D94879B" FromRole="Cliente" ToRole="Mascota" />
+          <NavigationProperty Name="Mascotas" Relationship="Self.FK__Mascota__cliente__4E88ABD4" FromRole="Cliente" ToRole="Mascota" />
         </EntityType>
         <EntityType Name="Consultorio">
           <Key>
@@ -557,8 +583,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sede_id" Type="Int32" />
-          <NavigationProperty Name="Sede" Relationship="Self.FK__Consultor__sede___5165187F" FromRole="Consultorio" ToRole="Sede" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__consul__5CD6CB2B" FromRole="Consultorio" ToRole="Servicio" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK__Consultor__sede___52593CB8" FromRole="Consultorio" ToRole="Sede" />
+          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__consul__5DCAEF64" FromRole="Consultorio" ToRole="Servicio" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -567,13 +593,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="contrasena" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="usuario_id" Type="Int32" />
           <Property Name="sede_id" Type="Int32" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__empleado_i__5535A963" FromRole="Empleado" ToRole="Cita" />
-          <NavigationProperty Name="Sede" Relationship="Self.FK__Empleado__sede_i__398D8EEE" FromRole="Empleado" ToRole="Sede" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__emplea__5BE2A6F2" FromRole="Empleado" ToRole="Servicio" />
-          <NavigationProperty Name="Usuarios" Relationship="VeterinariaModel.FK__Usuario__emplead__6FE99F9F" FromRole="Empleado" ToRole="Usuario" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__empleado_i__5629CD9C" FromRole="Empleado" ToRole="Cita" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK__Empleado__sede_i__3F466844" FromRole="Empleado" ToRole="Sede" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Empleado__usuari__3E52440B" FromRole="Empleado" ToRole="Usuario" />
+          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__emplea__5CD6CB2B" FromRole="Empleado" ToRole="Servicio" />
         </EntityType>
         <EntityType Name="Farmacia">
           <Key>
@@ -584,21 +610,9 @@
           <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="sede_id" Type="Int32" />
-          <NavigationProperty Name="Sede" Relationship="Self.FK__Farmacia__sede_i__3C69FB99" FromRole="Farmacia" ToRole="Sede" />
-          <NavigationProperty Name="FarmaciaMedicamentoes" Relationship="Self.FK__FarmaciaM__farma__46E78A0C" FromRole="Farmacia" ToRole="FarmaciaMedicamento" />
-          <NavigationProperty Name="InventarioMedicamentoes" Relationship="Self.FK__Inventari__farma__656C112C" FromRole="Farmacia" ToRole="InventarioMedicamento" />
-          <NavigationProperty Name="InventarioHerramientas" Relationship="Self.FK__Inventari__farma__693CA210" FromRole="Farmacia" ToRole="InventarioHerramienta" />
-        </EntityType>
-        <EntityType Name="FarmaciaMedicamento">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="farmacia_id" Type="Int32" />
-          <Property Name="medicamento_id" Type="Int32" />
-          <Property Name="cantidad" Type="Int32" />
-          <NavigationProperty Name="Farmacia" Relationship="Self.FK__FarmaciaM__farma__46E78A0C" FromRole="FarmaciaMedicamento" ToRole="Farmacia" />
-          <NavigationProperty Name="Medicamento" Relationship="Self.FK__FarmaciaM__medic__47DBAE45" FromRole="FarmaciaMedicamento" ToRole="Medicamento" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK__Farmacia__sede_i__4222D4EF" FromRole="Farmacia" ToRole="Sede" />
+          <NavigationProperty Name="InventarioMedicamentoes" Relationship="Self.FK__Inventari__farma__66603565" FromRole="Farmacia" ToRole="InventarioMedicamento" />
+          <NavigationProperty Name="InventarioHerramientas" Relationship="Self.FK__Inventari__farma__6A30C649" FromRole="Farmacia" ToRole="InventarioHerramienta" />
         </EntityType>
         <EntityType Name="Herramienta">
           <Key>
@@ -608,8 +622,8 @@
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="proveedor_id" Type="Int32" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.FK__Herramien__prove__412EB0B6" FromRole="Herramienta" ToRole="Proveedor" />
-          <NavigationProperty Name="InventarioHerramientas" Relationship="Self.FK__Inventari__herra__68487DD7" FromRole="Herramienta" ToRole="InventarioHerramienta" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK__Herramien__prove__46E78A0C" FromRole="Herramienta" ToRole="Proveedor" />
+          <NavigationProperty Name="InventarioHerramientas" Relationship="Self.FK__Inventari__herra__693CA210" FromRole="Herramienta" ToRole="InventarioHerramienta" />
         </EntityType>
         <EntityType Name="InventarioHerramienta">
           <Key>
@@ -619,8 +633,8 @@
           <Property Name="cantidad" Type="Int32" />
           <Property Name="herramientas_id" Type="Int32" />
           <Property Name="farmacia_id" Type="Int32" />
-          <NavigationProperty Name="Farmacia" Relationship="Self.FK__Inventari__farma__693CA210" FromRole="InventarioHerramienta" ToRole="Farmacia" />
-          <NavigationProperty Name="Herramienta" Relationship="Self.FK__Inventari__herra__68487DD7" FromRole="InventarioHerramienta" ToRole="Herramienta" />
+          <NavigationProperty Name="Farmacia" Relationship="Self.FK__Inventari__farma__6A30C649" FromRole="InventarioHerramienta" ToRole="Farmacia" />
+          <NavigationProperty Name="Herramienta" Relationship="Self.FK__Inventari__herra__693CA210" FromRole="InventarioHerramienta" ToRole="Herramienta" />
         </EntityType>
         <EntityType Name="InventarioMedicamento">
           <Key>
@@ -630,8 +644,8 @@
           <Property Name="cantidad" Type="Int32" />
           <Property Name="medicamento_id" Type="Int32" />
           <Property Name="farmacia_id" Type="Int32" />
-          <NavigationProperty Name="Farmacia" Relationship="Self.FK__Inventari__farma__656C112C" FromRole="InventarioMedicamento" ToRole="Farmacia" />
-          <NavigationProperty Name="Medicamento" Relationship="Self.FK__Inventari__medic__6477ECF3" FromRole="InventarioMedicamento" ToRole="Medicamento" />
+          <NavigationProperty Name="Farmacia" Relationship="Self.FK__Inventari__farma__66603565" FromRole="InventarioMedicamento" ToRole="Farmacia" />
+          <NavigationProperty Name="Medicamento" Relationship="Self.FK__Inventari__medic__656C112C" FromRole="InventarioMedicamento" ToRole="Medicamento" />
         </EntityType>
         <EntityType Name="Mascota">
           <Key>
@@ -645,10 +659,10 @@
           <Property Name="sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="cliente_id" Type="Int32" />
           <Property Name="sede_id" Type="Int32" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__mascota_id__5441852A" FromRole="Mascota" ToRole="Cita" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK__Mascota__cliente__4D94879B" FromRole="Mascota" ToRole="Cliente" />
-          <NavigationProperty Name="Sede" Relationship="Self.FK__Mascota__sede_id__4E88ABD4" FromRole="Mascota" ToRole="Sede" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__mascot__5AEE82B9" FromRole="Mascota" ToRole="Servicio" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__mascota_id__5535A963" FromRole="Mascota" ToRole="Cita" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Mascota__cliente__4E88ABD4" FromRole="Mascota" ToRole="Cliente" />
+          <NavigationProperty Name="Sede" Relationship="Self.FK__Mascota__sede_id__4F7CD00D" FromRole="Mascota" ToRole="Sede" />
+          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__mascot__5BE2A6F2" FromRole="Mascota" ToRole="Servicio" />
         </EntityType>
         <EntityType Name="Medicamento">
           <Key>
@@ -659,10 +673,9 @@
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="proveedor_id" Type="Int32" />
-          <NavigationProperty Name="FarmaciaMedicamentoes" Relationship="Self.FK__FarmaciaM__medic__47DBAE45" FromRole="Medicamento" ToRole="FarmaciaMedicamento" />
-          <NavigationProperty Name="InventarioMedicamentoes" Relationship="Self.FK__Inventari__medic__6477ECF3" FromRole="Medicamento" ToRole="InventarioMedicamento" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.FK__Medicamen__prove__440B1D61" FromRole="Medicamento" ToRole="Proveedor" />
-          <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__medicament__619B8048" FromRole="Medicamento" ToRole="Pago" />
+          <NavigationProperty Name="InventarioMedicamentoes" Relationship="Self.FK__Inventari__medic__656C112C" FromRole="Medicamento" ToRole="InventarioMedicamento" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK__Medicamen__prove__49C3F6B7" FromRole="Medicamento" ToRole="Proveedor" />
+          <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__medicament__628FA481" FromRole="Medicamento" ToRole="Pago" />
         </EntityType>
         <EntityType Name="Pago">
           <Key>
@@ -673,8 +686,17 @@
           <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="servicio_id" Type="Int32" />
           <Property Name="medicamento_id" Type="Int32" />
-          <NavigationProperty Name="Medicamento" Relationship="Self.FK__Pago__medicament__619B8048" FromRole="Pago" ToRole="Medicamento" />
-          <NavigationProperty Name="Servicio" Relationship="Self.FK__Pago__servicio_i__60A75C0F" FromRole="Pago" ToRole="Servicio" />
+          <NavigationProperty Name="Medicamento" Relationship="Self.FK__Pago__medicament__628FA481" FromRole="Pago" ToRole="Medicamento" />
+          <NavigationProperty Name="Servicio" Relationship="Self.FK__Pago__servicio_i__619B8048" FromRole="Pago" ToRole="Servicio" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaginaNavegar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario__perfil___3B75D760" FromRole="Perfil" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -685,8 +707,8 @@
           <Property Name="contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Herramientas" Relationship="Self.FK__Herramien__prove__412EB0B6" FromRole="Proveedor" ToRole="Herramienta" />
-          <NavigationProperty Name="Medicamentoes" Relationship="Self.FK__Medicamen__prove__440B1D61" FromRole="Proveedor" ToRole="Medicamento" />
+          <NavigationProperty Name="Herramientas" Relationship="Self.FK__Herramien__prove__46E78A0C" FromRole="Proveedor" ToRole="Herramienta" />
+          <NavigationProperty Name="Medicamentoes" Relationship="Self.FK__Medicamen__prove__49C3F6B7" FromRole="Proveedor" ToRole="Medicamento" />
         </EntityType>
         <EntityType Name="Sede">
           <Key>
@@ -696,11 +718,11 @@
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__sede_id__5629CD9C" FromRole="Sede" ToRole="Cita" />
-          <NavigationProperty Name="Consultorios" Relationship="Self.FK__Consultor__sede___5165187F" FromRole="Sede" ToRole="Consultorio" />
-          <NavigationProperty Name="Empleadoes" Relationship="Self.FK__Empleado__sede_i__398D8EEE" FromRole="Sede" ToRole="Empleado" />
-          <NavigationProperty Name="Farmacias" Relationship="Self.FK__Farmacia__sede_i__3C69FB99" FromRole="Sede" ToRole="Farmacia" />
-          <NavigationProperty Name="Mascotas" Relationship="Self.FK__Mascota__sede_id__4E88ABD4" FromRole="Sede" ToRole="Mascota" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__sede_id__571DF1D5" FromRole="Sede" ToRole="Cita" />
+          <NavigationProperty Name="Consultorios" Relationship="Self.FK__Consultor__sede___52593CB8" FromRole="Sede" ToRole="Consultorio" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK__Empleado__sede_i__3F466844" FromRole="Sede" ToRole="Empleado" />
+          <NavigationProperty Name="Farmacias" Relationship="Self.FK__Farmacia__sede_i__4222D4EF" FromRole="Sede" ToRole="Farmacia" />
+          <NavigationProperty Name="Mascotas" Relationship="Self.FK__Mascota__sede_id__4F7CD00D" FromRole="Sede" ToRole="Mascota" />
         </EntityType>
         <EntityType Name="Servicio">
           <Key>
@@ -713,11 +735,11 @@
           <Property Name="empleado_id" Type="Int32" />
           <Property Name="consultorio_id" Type="Int32" />
           <Property Name="tipoServicio_id" Type="Int32" />
-          <NavigationProperty Name="Consultorio" Relationship="Self.FK__Servicio__consul__5CD6CB2B" FromRole="Servicio" ToRole="Consultorio" />
-          <NavigationProperty Name="Empleado" Relationship="Self.FK__Servicio__emplea__5BE2A6F2" FromRole="Servicio" ToRole="Empleado" />
-          <NavigationProperty Name="Mascota" Relationship="Self.FK__Servicio__mascot__5AEE82B9" FromRole="Servicio" ToRole="Mascota" />
-          <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__servicio_i__60A75C0F" FromRole="Servicio" ToRole="Pago" />
-          <NavigationProperty Name="TipoServicio" Relationship="Self.FK__Servicio__tipoSe__5DCAEF64" FromRole="Servicio" ToRole="TipoServicio" />
+          <NavigationProperty Name="Consultorio" Relationship="Self.FK__Servicio__consul__5DCAEF64" FromRole="Servicio" ToRole="Consultorio" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK__Servicio__emplea__5CD6CB2B" FromRole="Servicio" ToRole="Empleado" />
+          <NavigationProperty Name="Mascota" Relationship="Self.FK__Servicio__mascot__5BE2A6F2" FromRole="Servicio" ToRole="Mascota" />
+          <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__servicio_i__619B8048" FromRole="Servicio" ToRole="Pago" />
+          <NavigationProperty Name="TipoServicio" Relationship="Self.FK__Servicio__tipoSe__5EBF139D" FromRole="Servicio" ToRole="TipoServicio" />
         </EntityType>
         <EntityType Name="TipoServicio">
           <Key>
@@ -727,9 +749,21 @@
           <Property Name="nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="costo" Type="Int32" />
           <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__tipoSe__5DCAEF64" FromRole="TipoServicio" ToRole="Servicio" />
+          <NavigationProperty Name="Servicios" Relationship="Self.FK__Servicio__tipoSe__5EBF139D" FromRole="TipoServicio" ToRole="Servicio" />
         </EntityType>
-        <Association Name="FK__Cita__empleado_i__5535A963">
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="perfil_id" Type="Int32" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK__Empleado__usuari__3E52440B" FromRole="Usuario" ToRole="Empleado" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Usuario__perfil___3B75D760" FromRole="Usuario" ToRole="Perfil" />
+        </EntityType>
+        <Association Name="FK__Cita__empleado_i__5629CD9C">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -741,7 +775,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cita__mascota_id__5441852A">
+        <Association Name="FK__Cita__mascota_id__5535A963">
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -753,7 +787,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cita__sede_id__5629CD9C">
+        <Association Name="FK__Cita__sede_id__571DF1D5">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -765,7 +799,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Mascota__cliente__4D94879B">
+        <Association Name="FK__Mascota__cliente__4E88ABD4">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
           <ReferentialConstraint>
@@ -777,7 +811,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Consultor__sede___5165187F">
+        <Association Name="FK__Consultor__sede___52593CB8">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Consultorio" Type="Self.Consultorio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -789,7 +823,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__consul__5CD6CB2B">
+        <Association Name="FK__Servicio__consul__5DCAEF64">
           <End Role="Consultorio" Type="Self.Consultorio" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -801,7 +835,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Empleado__sede_i__398D8EEE">
+        <Association Name="FK__Empleado__sede_i__3F466844">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
           <ReferentialConstraint>
@@ -813,7 +847,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__emplea__5BE2A6F2">
+        <Association Name="FK__Empleado__usuari__3E52440B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__emplea__5CD6CB2B">
           <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -825,7 +871,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Farmacia__sede_i__3C69FB99">
+        <Association Name="FK__Farmacia__sede_i__4222D4EF">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -837,19 +883,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FarmaciaM__farma__46E78A0C">
-          <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="0..1" />
-          <End Role="FarmaciaMedicamento" Type="Self.FarmaciaMedicamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Farmacia">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FarmaciaMedicamento">
-              <PropertyRef Name="farmacia_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inventari__farma__656C112C">
+        <Association Name="FK__Inventari__farma__66603565">
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="0..1" />
           <End Role="InventarioMedicamento" Type="Self.InventarioMedicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -861,7 +895,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__farma__693CA210">
+        <Association Name="FK__Inventari__farma__6A30C649">
           <End Role="Farmacia" Type="Self.Farmacia" Multiplicity="0..1" />
           <End Role="InventarioHerramienta" Type="Self.InventarioHerramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -873,19 +907,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FarmaciaM__medic__47DBAE45">
-          <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="0..1" />
-          <End Role="FarmaciaMedicamento" Type="Self.FarmaciaMedicamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Medicamento">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FarmaciaMedicamento">
-              <PropertyRef Name="medicamento_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Herramien__prove__412EB0B6">
+        <Association Name="FK__Herramien__prove__46E78A0C">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
           <End Role="Herramienta" Type="Self.Herramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -897,7 +919,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__herra__68487DD7">
+        <Association Name="FK__Inventari__herra__693CA210">
           <End Role="Herramienta" Type="Self.Herramienta" Multiplicity="0..1" />
           <End Role="InventarioHerramienta" Type="Self.InventarioHerramienta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -909,7 +931,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__medic__6477ECF3">
+        <Association Name="FK__Inventari__medic__656C112C">
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="0..1" />
           <End Role="InventarioMedicamento" Type="Self.InventarioMedicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -921,7 +943,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Mascota__sede_id__4E88ABD4">
+        <Association Name="FK__Mascota__sede_id__4F7CD00D">
           <End Role="Sede" Type="Self.Sede" Multiplicity="0..1" />
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="*" />
           <ReferentialConstraint>
@@ -933,7 +955,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__mascot__5AEE82B9">
+        <Association Name="FK__Servicio__mascot__5BE2A6F2">
           <End Role="Mascota" Type="Self.Mascota" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -945,7 +967,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Medicamen__prove__440B1D61">
+        <Association Name="FK__Medicamen__prove__49C3F6B7">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -957,7 +979,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__medicament__619B8048">
+        <Association Name="FK__Pago__medicament__628FA481">
           <End Role="Medicamento" Type="Self.Medicamento" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -969,7 +991,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__servicio_i__60A75C0F">
+        <Association Name="FK__Pago__servicio_i__619B8048">
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -981,7 +1003,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Servicio__tipoSe__5DCAEF64">
+        <Association Name="FK__Usuario__perfil___3B75D760">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="perfil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Servicio__tipoSe__5EBF139D">
           <End Role="TipoServicio" Type="Self.TipoServicio" Multiplicity="0..1" />
           <End Role="Servicio" Type="Self.Servicio" Multiplicity="*" />
           <ReferentialConstraint>
@@ -993,148 +1027,121 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VeterinariaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Veterinaria1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Citas" EntityType="Self.Cita" />
           <EntitySet Name="Clientes" EntityType="Self.Cliente" />
           <EntitySet Name="Consultorios" EntityType="Self.Consultorio" />
           <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
           <EntitySet Name="Farmacias" EntityType="Self.Farmacia" />
-          <EntitySet Name="FarmaciaMedicamentoes" EntityType="Self.FarmaciaMedicamento" />
           <EntitySet Name="Herramientas" EntityType="Self.Herramienta" />
           <EntitySet Name="InventarioHerramientas" EntityType="Self.InventarioHerramienta" />
           <EntitySet Name="InventarioMedicamentoes" EntityType="Self.InventarioMedicamento" />
           <EntitySet Name="Mascotas" EntityType="Self.Mascota" />
           <EntitySet Name="Medicamentoes" EntityType="Self.Medicamento" />
           <EntitySet Name="Pagoes" EntityType="Self.Pago" />
+          <EntitySet Name="Perfils" EntityType="Self.Perfil" />
           <EntitySet Name="Proveedors" EntityType="Self.Proveedor" />
           <EntitySet Name="Sedes" EntityType="Self.Sede" />
           <EntitySet Name="Servicios" EntityType="Self.Servicio" />
           <EntitySet Name="TipoServicios" EntityType="Self.TipoServicio" />
-          <AssociationSet Name="FK__Cita__empleado_i__5535A963" Association="Self.FK__Cita__empleado_i__5535A963">
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Cita__empleado_i__5629CD9C" Association="Self.FK__Cita__empleado_i__5629CD9C">
             <End Role="Empleado" EntitySet="Empleadoes" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cita__mascota_id__5441852A" Association="Self.FK__Cita__mascota_id__5441852A">
+          <AssociationSet Name="FK__Cita__mascota_id__5535A963" Association="Self.FK__Cita__mascota_id__5535A963">
             <End Role="Mascota" EntitySet="Mascotas" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cita__sede_id__5629CD9C" Association="Self.FK__Cita__sede_id__5629CD9C">
+          <AssociationSet Name="FK__Cita__sede_id__571DF1D5" Association="Self.FK__Cita__sede_id__571DF1D5">
             <End Role="Sede" EntitySet="Sedes" />
             <End Role="Cita" EntitySet="Citas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Mascota__cliente__4D94879B" Association="Self.FK__Mascota__cliente__4D94879B">
+          <AssociationSet Name="FK__Mascota__cliente__4E88ABD4" Association="Self.FK__Mascota__cliente__4E88ABD4">
             <End Role="Cliente" EntitySet="Clientes" />
             <End Role="Mascota" EntitySet="Mascotas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Consultor__sede___5165187F" Association="Self.FK__Consultor__sede___5165187F">
+          <AssociationSet Name="FK__Consultor__sede___52593CB8" Association="Self.FK__Consultor__sede___52593CB8">
             <End Role="Sede" EntitySet="Sedes" />
             <End Role="Consultorio" EntitySet="Consultorios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__consul__5CD6CB2B" Association="Self.FK__Servicio__consul__5CD6CB2B">
+          <AssociationSet Name="FK__Servicio__consul__5DCAEF64" Association="Self.FK__Servicio__consul__5DCAEF64">
             <End Role="Consultorio" EntitySet="Consultorios" />
             <End Role="Servicio" EntitySet="Servicios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Empleado__sede_i__398D8EEE" Association="Self.FK__Empleado__sede_i__398D8EEE">
+          <AssociationSet Name="FK__Empleado__sede_i__3F466844" Association="Self.FK__Empleado__sede_i__3F466844">
             <End Role="Sede" EntitySet="Sedes" />
             <End Role="Empleado" EntitySet="Empleadoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__emplea__5BE2A6F2" Association="Self.FK__Servicio__emplea__5BE2A6F2">
+          <AssociationSet Name="FK__Empleado__usuari__3E52440B" Association="Self.FK__Empleado__usuari__3E52440B">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__emplea__5CD6CB2B" Association="Self.FK__Servicio__emplea__5CD6CB2B">
             <End Role="Empleado" EntitySet="Empleadoes" />
             <End Role="Servicio" EntitySet="Servicios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Farmacia__sede_i__3C69FB99" Association="Self.FK__Farmacia__sede_i__3C69FB99">
+          <AssociationSet Name="FK__Farmacia__sede_i__4222D4EF" Association="Self.FK__Farmacia__sede_i__4222D4EF">
             <End Role="Sede" EntitySet="Sedes" />
             <End Role="Farmacia" EntitySet="Farmacias" />
           </AssociationSet>
-          <AssociationSet Name="FK__FarmaciaM__farma__46E78A0C" Association="Self.FK__FarmaciaM__farma__46E78A0C">
-            <End Role="Farmacia" EntitySet="Farmacias" />
-            <End Role="FarmaciaMedicamento" EntitySet="FarmaciaMedicamentoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inventari__farma__656C112C" Association="Self.FK__Inventari__farma__656C112C">
+          <AssociationSet Name="FK__Inventari__farma__66603565" Association="Self.FK__Inventari__farma__66603565">
             <End Role="Farmacia" EntitySet="Farmacias" />
             <End Role="InventarioMedicamento" EntitySet="InventarioMedicamentoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__farma__693CA210" Association="Self.FK__Inventari__farma__693CA210">
+          <AssociationSet Name="FK__Inventari__farma__6A30C649" Association="Self.FK__Inventari__farma__6A30C649">
             <End Role="Farmacia" EntitySet="Farmacias" />
             <End Role="InventarioHerramienta" EntitySet="InventarioHerramientas" />
           </AssociationSet>
-          <AssociationSet Name="FK__FarmaciaM__medic__47DBAE45" Association="Self.FK__FarmaciaM__medic__47DBAE45">
-            <End Role="Medicamento" EntitySet="Medicamentoes" />
-            <End Role="FarmaciaMedicamento" EntitySet="FarmaciaMedicamentoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Herramien__prove__412EB0B6" Association="Self.FK__Herramien__prove__412EB0B6">
+          <AssociationSet Name="FK__Herramien__prove__46E78A0C" Association="Self.FK__Herramien__prove__46E78A0C">
             <End Role="Proveedor" EntitySet="Proveedors" />
             <End Role="Herramienta" EntitySet="Herramientas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__herra__68487DD7" Association="Self.FK__Inventari__herra__68487DD7">
+          <AssociationSet Name="FK__Inventari__herra__693CA210" Association="Self.FK__Inventari__herra__693CA210">
             <End Role="Herramienta" EntitySet="Herramientas" />
             <End Role="InventarioHerramienta" EntitySet="InventarioHerramientas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__medic__6477ECF3" Association="Self.FK__Inventari__medic__6477ECF3">
+          <AssociationSet Name="FK__Inventari__medic__656C112C" Association="Self.FK__Inventari__medic__656C112C">
             <End Role="Medicamento" EntitySet="Medicamentoes" />
             <End Role="InventarioMedicamento" EntitySet="InventarioMedicamentoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Mascota__sede_id__4E88ABD4" Association="Self.FK__Mascota__sede_id__4E88ABD4">
+          <AssociationSet Name="FK__Mascota__sede_id__4F7CD00D" Association="Self.FK__Mascota__sede_id__4F7CD00D">
             <End Role="Sede" EntitySet="Sedes" />
             <End Role="Mascota" EntitySet="Mascotas" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__mascot__5AEE82B9" Association="Self.FK__Servicio__mascot__5AEE82B9">
+          <AssociationSet Name="FK__Servicio__mascot__5BE2A6F2" Association="Self.FK__Servicio__mascot__5BE2A6F2">
             <End Role="Mascota" EntitySet="Mascotas" />
             <End Role="Servicio" EntitySet="Servicios" />
           </AssociationSet>
-          <AssociationSet Name="FK__Medicamen__prove__440B1D61" Association="Self.FK__Medicamen__prove__440B1D61">
+          <AssociationSet Name="FK__Medicamen__prove__49C3F6B7" Association="Self.FK__Medicamen__prove__49C3F6B7">
             <End Role="Proveedor" EntitySet="Proveedors" />
             <End Role="Medicamento" EntitySet="Medicamentoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__medicament__619B8048" Association="Self.FK__Pago__medicament__619B8048">
+          <AssociationSet Name="FK__Pago__medicament__628FA481" Association="Self.FK__Pago__medicament__628FA481">
             <End Role="Medicamento" EntitySet="Medicamentoes" />
             <End Role="Pago" EntitySet="Pagoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__servicio_i__60A75C0F" Association="Self.FK__Pago__servicio_i__60A75C0F">
+          <AssociationSet Name="FK__Pago__servicio_i__619B8048" Association="Self.FK__Pago__servicio_i__619B8048">
             <End Role="Servicio" EntitySet="Servicios" />
             <End Role="Pago" EntitySet="Pagoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Servicio__tipoSe__5DCAEF64" Association="Self.FK__Servicio__tipoSe__5DCAEF64">
+          <AssociationSet Name="FK__Usuario__perfil___3B75D760" Association="Self.FK__Usuario__perfil___3B75D760">
+            <End Role="Perfil" EntitySet="Perfils" />
+            <End Role="Usuario" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Servicio__tipoSe__5EBF139D" Association="Self.FK__Servicio__tipoSe__5EBF139D">
             <End Role="TipoServicio" EntitySet="TipoServicios" />
             <End Role="Servicio" EntitySet="Servicios" />
           </AssociationSet>
-          <EntitySet Name="Usuarios" EntityType="VeterinariaModel.Usuario" />
-          <AssociationSet Name="FK__Usuario__emplead__6FE99F9F" Association="VeterinariaModel.FK__Usuario__emplead__6FE99F9F">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="Usuario" EntitySet="Usuarios" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="salt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="empleado_id" Type="Int32" />
-          <NavigationProperty Name="Empleado" Relationship="VeterinariaModel.FK__Usuario__emplead__6FE99F9F" FromRole="Usuario" ToRole="Empleado" />
-        </EntityType>
-        <Association Name="FK__Usuario__emplead__6FE99F9F">
-          <End Type="VeterinariaModel.Empleado" Role="Empleado" Multiplicity="0..1" />
-          <End Type="VeterinariaModel.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empleado">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="empleado_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="VeterinariaModelStoreContainer" CdmEntityContainer="VeterinariaEntities">
+        <EntityContainerMapping StorageEntityContainer="Veterinaria1ModelStoreContainer" CdmEntityContainer="Veterinaria1Entities">
           <EntitySetMapping Name="Citas">
-            <EntityTypeMapping TypeName="VeterinariaModel.Cita">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Cita">
               <MappingFragment StoreEntitySet="Cita">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
@@ -1146,7 +1153,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="VeterinariaModel.Cliente">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1158,7 +1165,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Consultorios">
-            <EntityTypeMapping TypeName="VeterinariaModel.Consultorio">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Consultorio">
               <MappingFragment StoreEntitySet="Consultorio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1167,19 +1174,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empleadoes">
-            <EntityTypeMapping TypeName="VeterinariaModel.Empleado">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
                 <ScalarProperty Name="sede_id" ColumnName="sede_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Farmacias">
-            <EntityTypeMapping TypeName="VeterinariaModel.Farmacia">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Farmacia">
               <MappingFragment StoreEntitySet="Farmacia">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1190,7 +1197,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Herramientas">
-            <EntityTypeMapping TypeName="VeterinariaModel.Herramienta">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Herramienta">
               <MappingFragment StoreEntitySet="Herramienta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1200,7 +1207,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventarioHerramientas">
-            <EntityTypeMapping TypeName="VeterinariaModel.InventarioHerramienta">
+            <EntityTypeMapping TypeName="Veterinaria1Model.InventarioHerramienta">
               <MappingFragment StoreEntitySet="InventarioHerramienta">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
@@ -1210,7 +1217,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventarioMedicamentoes">
-            <EntityTypeMapping TypeName="VeterinariaModel.InventarioMedicamento">
+            <EntityTypeMapping TypeName="Veterinaria1Model.InventarioMedicamento">
               <MappingFragment StoreEntitySet="InventarioMedicamento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
@@ -1220,7 +1227,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Mascotas">
-            <EntityTypeMapping TypeName="VeterinariaModel.Mascota">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Mascota">
               <MappingFragment StoreEntitySet="Mascota">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1234,7 +1241,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Medicamentoes">
-            <EntityTypeMapping TypeName="VeterinariaModel.Medicamento">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Medicamento">
               <MappingFragment StoreEntitySet="Medicamento">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1245,7 +1252,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pagoes">
-            <EntityTypeMapping TypeName="VeterinariaModel.Pago">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Pago">
               <MappingFragment StoreEntitySet="Pago">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="costo_total" ColumnName="costo_total" />
@@ -1255,8 +1262,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Perfils">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaginaNavegar" ColumnName="PaginaNavegar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Proveedors">
-            <EntityTypeMapping TypeName="VeterinariaModel.Proveedor">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1267,7 +1283,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sedes">
-            <EntityTypeMapping TypeName="VeterinariaModel.Sede">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Sede">
               <MappingFragment StoreEntitySet="Sede">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1277,7 +1293,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Servicios">
-            <EntityTypeMapping TypeName="VeterinariaModel.Servicio">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Servicio">
               <MappingFragment StoreEntitySet="Servicio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
@@ -1290,7 +1306,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoServicios">
-            <EntityTypeMapping TypeName="VeterinariaModel.TipoServicio">
+            <EntityTypeMapping TypeName="Veterinaria1Model.TipoServicio">
               <MappingFragment StoreEntitySet="TipoServicio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1300,13 +1316,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="VeterinariaModel.Usuario">
+            <EntityTypeMapping TypeName="Veterinaria1Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
-                <ScalarProperty Name="salt" ColumnName="salt" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="perfil_id" ColumnName="perfil_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

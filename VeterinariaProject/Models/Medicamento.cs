@@ -11,14 +11,12 @@ namespace VeterinariaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
-
+    
     public partial class Medicamento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medicamento()
         {
-            this.FarmaciaMedicamentoes = new HashSet<FarmaciaMedicamento>();
             this.InventarioMedicamentoes = new HashSet<InventarioMedicamento>();
             this.Pagoes = new HashSet<Pago>();
         }
@@ -28,17 +26,10 @@ namespace VeterinariaProject.Models
         public string tipo { get; set; }
         public Nullable<decimal> precio { get; set; }
         public Nullable<int> proveedor_id { get; set; }
-
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FarmaciaMedicamento> FarmaciaMedicamentoes { get; set; }
-
-        [JsonIgnore]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventarioMedicamento> InventarioMedicamentoes { get; set; }
         public virtual Proveedor Proveedor { get; set; }
-
-        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pago> Pagoes { get; set; }
     }

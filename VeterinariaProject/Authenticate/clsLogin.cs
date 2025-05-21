@@ -12,7 +12,7 @@ namespace VeterinariaProject.Authenticate
         {
             loginRespuesta = new LoginRespuesta();
         }
-        public VeterinariaEntities vet = new VeterinariaEntities();
+        public Veterinaria1Entities vet = new Veterinaria1Entities();
         public Login login { get; set; }
         public LoginRespuesta loginRespuesta { get; set; }
         private bool ValidarUsuario()
@@ -77,12 +77,10 @@ namespace VeterinariaProject.Authenticate
                 string token = TokenGenerator.GenerateTokenJwt(login.Usuario);
                 //Consulta la información del usuario y el perfil
                 return from U in vet.Set<Usuario>()
-                       join UP in vet.Set<Usuario_Perfil>()
-                       on U.idUsuario equals UP.idUsuario
                        join P in vet.Set<Perfil>()
-                       on UP.idPerfil equals P.idPerfil
+                       on U.perfil_id equals P.id
                        where U.userName == login.Usuario &&
-                               U.Clave == login.Clave
+                               U.contraseña == login.Clave
                        select new LoginRespuesta
                        {
                            Usuario = U.userName,

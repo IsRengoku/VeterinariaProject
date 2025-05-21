@@ -11,8 +11,7 @@ namespace VeterinariaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
-
+    
     public partial class Empleado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,25 +19,20 @@ namespace VeterinariaProject.Models
         {
             this.Citas = new HashSet<Cita>();
             this.Servicios = new HashSet<Servicio>();
-            this.Usuarios = new HashSet<Usuario>();
         }
     
         public int id { get; set; }
         public string nombre { get; set; }
         public string correo { get; set; }
-        public string contrasena { get; set; }
-        public string rol { get; set; }
+        public Nullable<int> telefono { get; set; }
+        public Nullable<int> usuario_id { get; set; }
         public Nullable<int> sede_id { get; set; }
-
-        [JsonIgnore]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cita> Citas { get; set; }
         public virtual Sede Sede { get; set; }
-        [JsonIgnore]
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Servicio> Servicios { get; set; }
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-CREATE DATABASE Veterinaria;-- tablas
+CREATE DATABASE Veterinaria1;-- tablas
 GO
-USE Veterinaria;
+USE Veterinaria1;
 GO
 -- Tiene sedes en varias ciudades del país.
 CREATE TABLE Sede ( --Samuel
@@ -11,12 +11,28 @@ CREATE TABLE Sede ( --Samuel
 )
 GO
 
+CREATE TABLE Perfil ( --Laura
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100),
+    PaginaNavegar NVARCHAR(MAX),
+);
+GO
+
+CREATE TABLE Usuario ( --Laura
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    userName NVARCHAR(100),
+    contraseña NVARCHAR(MAX),
+    salt NVARCHAR(MAX),
+    perfil_id INT FOREIGN KEY REFERENCES Perfil(id)
+);
+GO
+
 CREATE TABLE Empleado ( --Samuel
     id INT IDENTITY(1,1) PRIMARY KEY,
     nombre NVARCHAR(100) NOT NULL,
     correo NVARCHAR(100) NOT NULL,
-    contrasena NVARCHAR(100) NOT NULL,
-    rol NVARCHAR(50) NOT NULL,
+	telefono INT,
+    usuario_id INT FOREIGN KEY REFERENCES Usuario(id),
     sede_id INT FOREIGN KEY REFERENCES Sede(id)
 )
 GO
@@ -57,14 +73,6 @@ CREATE TABLE Medicamento ( --Laura
 );
 GO
 
-CREATE TABLE Usuario ( --Laura
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    userName NVARCHAR(100),
-    contraseña NVARCHAR(MAX),
-    salt NVARCHAR(MAX),
-    empleado_id INT FOREIGN KEY REFERENCES Empleado(id)
-);
-GO
 
 CREATE TABLE Cliente ( --Laura
     id INT IDENTITY(1,1) PRIMARY KEY,

@@ -13,10 +13,10 @@ namespace VeterinariaProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VeterinariaEntities : DbContext
+    public partial class Veterinaria1Entities : DbContext
     {
-        public VeterinariaEntities()
-            : base("name=VeterinariaEntities")
+        public Veterinaria1Entities()
+            : base("name=Veterinaria1Entities")
         {
         }
     
@@ -30,13 +30,13 @@ namespace VeterinariaProject.Models
         public virtual DbSet<Consultorio> Consultorios { get; set; }
         public virtual DbSet<Empleado> Empleadoes { get; set; }
         public virtual DbSet<Farmacia> Farmacias { get; set; }
-        public virtual DbSet<FarmaciaMedicamento> FarmaciaMedicamentoes { get; set; }
         public virtual DbSet<Herramienta> Herramientas { get; set; }
         public virtual DbSet<InventarioHerramienta> InventarioHerramientas { get; set; }
         public virtual DbSet<InventarioMedicamento> InventarioMedicamentoes { get; set; }
         public virtual DbSet<Mascota> Mascotas { get; set; }
         public virtual DbSet<Medicamento> Medicamentoes { get; set; }
         public virtual DbSet<Pago> Pagoes { get; set; }
+        public virtual DbSet<Perfil> Perfils { get; set; }
         public virtual DbSet<Proveedor> Proveedors { get; set; }
         public virtual DbSet<Sede> Sedes { get; set; }
         public virtual DbSet<Servicio> Servicios { get; set; }

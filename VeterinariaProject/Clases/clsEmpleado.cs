@@ -10,7 +10,7 @@ namespace VeterinariaProject.Clases
 {
         public class clsEmpleado
     {
-        private VeterinariaEntities vet = new VeterinariaEntities();
+        private Veterinaria1Entities vet = new Veterinaria1Entities();
 
         private Empleado emp { get; set; }
 
@@ -51,8 +51,7 @@ namespace VeterinariaProject.Clases
                 }
                 sed.nombre = emp.nombre;
                 sed.correo = emp.correo;
-                sed.contrasena = emp.contrasena;
-                sed.rol = emp.rol;
+                sed.usuario_id = emp.usuario_id;
                 sed.sede_id = emp.sede_id;
                 vet.Empleadoes.AddOrUpdate(emp);
                 vet.SaveChanges();

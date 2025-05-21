@@ -14,12 +14,20 @@ namespace VeterinariaProject.Models
     
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.Empleadoes = new HashSet<Empleado>();
+        }
+    
         public int id { get; set; }
         public string userName { get; set; }
         public string contraseña { get; set; }
         public string salt { get; set; }
-        public Nullable<int> empleado_id { get; set; }
+        public Nullable<int> perfil_id { get; set; }
     
-        public virtual Empleado Empleado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empleado> Empleadoes { get; set; }
+        public virtual Perfil Perfil { get; set; }
     }
 }

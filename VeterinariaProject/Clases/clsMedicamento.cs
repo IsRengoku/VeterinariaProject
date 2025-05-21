@@ -10,7 +10,7 @@ namespace VeterinariaProject.Clases
 {
         public class clsMedicamento
     {
-        private VeterinariaEntities vet = new VeterinariaEntities();
+        private Veterinaria1Entities vet = new Veterinaria1Entities();
 
         private Medicamento medicamento { get; set; }
 
