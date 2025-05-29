@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using VeterinariaProject.Authenticate;
 
 namespace VeterinariaProject
 {
@@ -10,6 +11,7 @@ namespace VeterinariaProject
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
