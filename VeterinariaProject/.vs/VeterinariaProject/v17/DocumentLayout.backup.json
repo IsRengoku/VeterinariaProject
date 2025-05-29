@@ -1,12 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\hstev\\Documents\\IT\\VeterinariaProject\\VeterinariaProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|c:\\users\\hstev\\documents\\it\\veterinariaproject\\veterinariaproject\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\hstev\\Documents\\IT\\VeterinariaProject\\VeterinariaProject\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "C:\\Users\\hstev\\Documents\\IT\\VeterinariaProject\\VeterinariaProject\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-05-28T02:45:32.945Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
