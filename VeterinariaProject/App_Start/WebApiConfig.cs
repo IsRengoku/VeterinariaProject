@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using VeterinariaProject.Authenticate;
 
 namespace VeterinariaProject
@@ -10,6 +11,10 @@ namespace VeterinariaProject
     {
         public static void Register(HttpConfiguration config)
         {
+            // Habilitar CORS globalmente
+            var cors = new EnableCorsAttribute("*", "*", "*"); // origenes, headers, métodos
+            config.EnableCors(cors);
+
             // Web API configuration and services
             config.MessageHandlers.Add(new TokenValidationHandler());
 
