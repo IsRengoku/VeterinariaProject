@@ -33,6 +33,13 @@ namespace VeterinariaProject.Clases
             Herramienta her = vet.Herramientas.FirstOrDefault(p => p.id == idHerramienta);
             return her;
         }
+
+        public List<Herramienta> ConsultarTodos()
+        {
+            return vet.Herramientas
+                .OrderBy(m => m.id)
+                .ToList();
+        }
         public List<Herramienta> ConsultarXProveedor(string nombreProveedor)
         {
             return vet.Herramientas
