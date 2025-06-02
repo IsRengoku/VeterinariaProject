@@ -15,6 +15,9 @@ namespace VeterinariaProject
             var cors = new EnableCorsAttribute("*", "*", "*"); // origenes, headers, métodos
             config.EnableCors(cors);
 
+            // Fix circular reference issue in JSON
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             // Web API configuration and services
             config.MessageHandlers.Add(new TokenValidationHandler());
 
