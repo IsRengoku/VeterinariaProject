@@ -10,7 +10,7 @@ using VeterinariaProject.Models;
 namespace VeterinariaProject.Controllers
 {
     [RoutePrefix("api/Herramienta")]
-    //[Authorize]
+    [Authorize]
     public class HerramientaController : ApiController
     {
        private clsHerramienta Herramienta = new clsHerramienta();
