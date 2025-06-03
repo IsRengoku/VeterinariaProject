@@ -33,6 +33,17 @@ namespace VeterinariaProject.Clases
             Cita cita = vet.Citas.FirstOrDefault(p => p.id == idCita);
             return cita;
         }
+
+        public List<Cita> ConsultarPorEmpleadoYFecha(int empleadoId, DateTime fecha)
+        {
+            List<Cita> citas = vet.Citas
+                .Where(c => c.empleado_id == empleadoId &&
+                           c.fecha.Date == fecha.Date)
+                .ToList();
+
+            return citas;
+        }
+
         public List<Cita> ConsultarTodos()
         {
             return vet.Citas

@@ -31,6 +31,13 @@ namespace VeterinariaProject.Controllers
         }
 
         [HttpGet]
+        [Route("ConsultarPorEmpleadoYFecha")]
+        public List<Cita> ConsultarPorEmpleadoYFecha(int idEmpleado, DateTime fecha)
+        {
+            return cita.ConsultarPorEmpleadoYFecha(idEmpleado, fecha);
+        }
+
+        [HttpGet]
         [Route("ConsultarTodos")]
         public List<Cita> ConsultarTodos()
         {
