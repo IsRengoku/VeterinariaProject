@@ -23,6 +23,13 @@ namespace VeterinariaProject.Controllers
         }
 
         [HttpGet]
+        [Route("ConsultarTodos")]
+        public List<Herramienta> ConsultarTodos()
+        {
+            return Herramienta.ConsultarTodos();
+        }
+
+        [HttpGet]
         [Route("ConsultarXId")]
         public Herramienta ConsultarXId(int idHerramienta)
         {
