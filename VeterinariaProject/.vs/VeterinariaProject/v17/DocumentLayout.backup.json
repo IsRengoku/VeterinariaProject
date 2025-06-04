@@ -3,15 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|c:\\users\\samue\\onedrive\\escritorio\\proyecto_vet\\veterinariaproject\\veterinariaproject\\controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:controllers\\serviciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|c:\\users\\samue\\onedrive\\escritorio\\proyecto_vet\\veterinariaproject\\veterinariaproject\\clases\\clscita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:clases\\clscita.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|c:\\users\\samue\\onedrive\\escritorio\\proyecto_vet\\veterinariaproject\\veterinariaproject\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|c:\\users\\samue\\onedrive\\escritorio\\proyecto_vet\\veterinariaproject\\veterinariaproject\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "AbsoluteMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
       "RelativeMoniker": "D:0:0:{29C9F6C8-5135-480B-84BD-80C81FF742F5}|VeterinariaProject.csproj|solutionrelative:models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     }
   ],
@@ -27,40 +31,52 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ServicioController.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Controllers\\ServicioController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServicioController.cs",
+              "ToolTip": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Controllers\\ServicioController.cs",
+              "RelativeToolTip": "Controllers\\ServicioController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAIwEMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T00:35:18.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "CitaController.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Controllers\\CitaController.cs",
               "RelativeDocumentMoniker": "Controllers\\CitaController.cs",
               "ToolTip": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Controllers\\CitaController.cs",
               "RelativeToolTip": "Controllers\\CitaController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwCQAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwCQAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T21:19:27.022Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "clsCita.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Clases\\clsCita.cs",
               "RelativeDocumentMoniker": "Clases\\clsCita.cs",
               "ToolTip": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Clases\\clsCita.cs",
               "RelativeToolTip": "Clases\\clsCita.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowCQAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwCEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-03T21:18:48.009Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Model1.edmx [Diagram1]",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Models\\Model1.edmx",
               "RelativeDocumentMoniker": "Models\\Model1.edmx",
               "ToolTip": "C:\\Users\\samue\\OneDrive\\Escritorio\\Proyecto_Vet\\VeterinariaProject\\VeterinariaProject\\Models\\Model1.edmx [Diagram1]",
               "RelativeToolTip": "Models\\Model1.edmx [Diagram1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2025-06-03T19:06:51.156Z",
-              "EditorCaption": " [Diagram1]"
+              "WhenOpened": "2025-06-03T19:06:51.156Z"
             }
           ]
         }
